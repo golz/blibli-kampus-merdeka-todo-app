@@ -1,0 +1,190 @@
+/****************************************************************************
+ * Created by goldwin.japar (https://goldwin.now.sh)
+ * Copyright 2022 | Onboarding Blibli Kampus Merdeka & Binus 3+1
+ * For Educational Purpose
+ ****************************************************************************/
+
+@font-face {
+  font-display: fallback;
+  font-family: 'effra';
+  src: url('https://www.static-src.com/fonts/1.0.0/effra/effra-regular.woff2') format('woff2'),
+  url('https://www.static-src.com/fonts/1.0.0/effra/effra-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: 'efframedium';
+  src: url('https://www.static-src.com/fonts/1.0.0/effra/effraMedium-regular.woff2') format('woff2'),
+  url('https://www.static-src.com/fonts/1.0.0/effra/efframedium-regular.ttf') format('truetype');
+}
+
+$blue: #0095da;
+$grey: #f1f1f1;
+$white: #fff;
+$black: #000;
+$box-shadow: 0 0 16px -4px rgba(0, 0, 0, 0.12);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'effra', 'efframedium', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: $grey;
+  background-image: url(https://ik.imagekit.io/golz/background_DBtOhDFHDBzP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646304756984);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+nav {
+  width: 300px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  margin: 4px auto;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: $box-shadow;
+
+  a {
+    color: $blue;
+  }
+}
+
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 520px;
+  min-height: 600px;
+  background: $white;
+  text-align: center;
+  margin: 64px auto;
+  border-radius: 24px;
+  padding-bottom: 32px;
+  box-shadow: $box-shadow;
+}
+
+h1 {
+  margin: 32px 0;
+  color: $blue;
+  font-size: 24px;
+}
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-form {
+  margin-bottom: 32px;
+}
+
+.todo-input {
+  padding: 14px 32px 14px 16px;
+  border-radius: 8px 0 0 8px;
+  border: 2px solid $blue;
+  outline: none;
+  width: 320px;
+  background: transparent;
+  color: $black;
+}
+
+.todo-input::placeholder {
+  color: #5c5c5c;
+}
+
+.todo-button {
+  padding: 16px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+                  90deg,
+                  $blue 0%,
+                  #0eb3ff 100%
+  );
+  color: $white;
+  text-transform: capitalize;
+}
+
+.todo-input.edit {
+  border: 2px solid #149fff;
+}
+
+.todo-button.edit {
+  background: linear-gradient(
+                  90deg,
+                  $blue 0%,
+                  #0eb3ff 100%
+  );
+  padding: 16px 22px;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  color: $white;
+  background: linear-gradient(
+                  90deg,
+                  #f7931e 0%,
+                  #f8a33f 100%
+  );
+
+  padding: 16px;
+  border-radius: 8px;
+  width: 90%;
+}
+
+.todo-row:nth-child(4n + 1) {
+  background: linear-gradient(
+                  90deg,
+                  #8bc63f 0%,
+                  #9bce59 100%
+  );
+}
+
+.todo-row:nth-child(4n + 2) {
+  background: linear-gradient(
+                  90deg,
+                  #ec008c 0%,
+                  #ff0f9d 100%
+  );
+}
+
+.todo-row:nth-child(4n + 3) {
+  background: linear-gradient(
+                  90deg,
+                  $blue 0%,
+                  #0eb3ff 100%
+  );
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: $white;
+}
+
+.edit-icon {
+  color: $white;
+}

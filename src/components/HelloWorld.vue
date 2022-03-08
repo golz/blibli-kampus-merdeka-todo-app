@@ -1,41 +1,98 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <input type="text"
+           :class="{ 'error': hasErrors }"
+           @keyup="validate"
+           v-model="text">
+    <p>Inputted Text: {{ text }}</p>
+    <p>Reversed Text: {{ reversedText }}</p>
+    <button @click="reverse">Reverse</button>
+    <div>
+      Has Errors: {{ hasErrors }}
+    </div>
+    <div>
+      Answer: {{ answer }}
+    </div>
+    <img :src="answerImage" :alt="answerImage">
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import _ from 'lodash'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      text: '',
+      reversedText: '',
+      errors: [],
+      answer: '',
+      answerImage: ''
+    }
+  },
+  computed: {
+    hasErrors () {
+      return this.errors.length > 0
+    }
+  },
+  beforeCreate () {
+    console.log('😇 Before create')
+  },
+  created () {
+    console.log('🚀 Created!')
+  },
+  mounted () {
+    console.log('🐎 Mounted')
+  },
+  beforeDestroy () {
+    console.log('🤯 Before destroy')
+  },
+  destroyed () {
+    console.log('💥 Destroyed!')
+  },
+  methods: {
+    reverse () {
+      if (!this.validate()) return
+      this.reversedText = this.text.split('').reverse().join('')
+    },
+    validate () {
+      this.errors = []
+      if (!this.text) {
+        this.errors.push('Must be filled')
+        return false
+      }
+      if (this.text.length < 6) {
+        this.errors.push('Must be more than 5 characters')
+        return false
+      }
+      return true
+    },
+    getAnswer () {
+      axios.get('https://yesno.wtf/api')
+        .then((response) => {
+          const { answer, image } = response.data
+          this.answer = answer
+          this.answerImage = image
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    debounceGetAnswer: _.debounce(function() {
+      this.getAnswer()
+    }, 500)
+  },
+  watch: {
+    text () {
+      if (!this.validate()) return
+      this.answer = 'Loading...'
+      this.debounceGetAnswer()
+    }
   }
 }
 </script>
@@ -55,5 +112,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+input.error {
+  border: 1px solid red;
 }
 </style>
