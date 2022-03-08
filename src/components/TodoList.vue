@@ -65,3 +65,75 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/variable.scss';
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  color: $white;
+  background: linear-gradient(
+      90deg,
+      #f7931e 0%,
+      #f8a33f 100%
+  );
+
+  padding: 16px;
+  border-radius: 8px;
+  width: 90%;
+}
+
+.todo-row:nth-child(4n + 1) {
+  background: linear-gradient(
+      90deg,
+      #8bc63f 0%,
+      #9bce59 100%
+  );
+}
+
+.todo-row:nth-child(4n + 2) {
+  background: linear-gradient(
+      90deg,
+      #ec008c 0%,
+      #ff0f9d 100%
+  );
+}
+
+.todo-row:nth-child(4n + 3) {
+  background: linear-gradient(
+      90deg,
+      $blue 0%,
+      #0eb3ff 100%
+  );
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: $white;
+}
+
+.edit-icon {
+  color: $white;
+}
+</style>

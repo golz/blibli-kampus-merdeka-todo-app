@@ -75,3 +75,21 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/variable.scss';
+
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 520px;
+  min-height: 600px;
+  background: $white;
+  text-align: center;
+  margin: 64px auto;
+  border-radius: 24px;
+  padding-bottom: 32px;
+  box-shadow: $box-shadow;
+}
+</style>
